@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 
 namespace WebApplication1.Controllers
 {
@@ -18,8 +18,9 @@ namespace WebApplication1.Controllers
             string TwoWordsJoined = JoinTwoWords("hal", "lo");
             string amountOfDNAParts = ClashCountDNAParts("ATGCTTCAGAAAAGGTCAGCG");
             string AmountYouNeedToBorrow = BorrowMoney("3 17 4");
+            string UrlUsername = GetUsername("http://www.githib.com/MathiasV-Immalle");
 
-            return AmountYouNeedToBorrow;
+            return UrlUsername;
         }
         // 
         // GET: /HelloWorld/Welcome/ 
@@ -35,6 +36,20 @@ namespace WebApplication1.Controllers
         public static string JoinTwoWords(string firstStr, string secondStr)
         {
             return firstStr + secondStr;
+        }
+
+        public static string GetUsername(string url)
+        {
+
+            Regex rx = new Regex(@"http:\/\/\w+\.\w+\.\w+\/([A-Za-z0-9]+-[A-Za-z0-9]+)");
+
+            MatchCollection matches = rx.Matches(url);
+
+            Match usernameMatch = matches[1];
+
+            string username = Convert.ToString(usernameMatch);
+
+            return username;
         }
 
         public static string BorrowMoney(string CostAvailablemoneyAmountyouwanttobuy)

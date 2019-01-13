@@ -1,6 +1,4 @@
-using System;
 using Xunit;
-using WebApplication1;
 
 namespace XUnitTestProject1
 {
